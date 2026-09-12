@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AERO ADDICTZ — Your Next Destination Isn't On Earth</title>
+<meta name="description" content="AERO ADDICTZ is a commercial space tourism experience. Book suborbital, orbital and lunar journeys with a friendly AI mission guide." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Starfield canvas background, sits behind everything -->
+<canvas id="starfield"></canvas>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="brand">
+      <span class="brand-badge">
+        <svg viewBox="0 0 48 48" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" fill="url(#gradLogo)"/>
+          <path d="M24 10c4 5 6 10 6 15 0 3-1.3 5.6-3 7.6L24 36l-3-3.4C19.3 30.6 18 28 18 25c0-5 2-10 6-15z" fill="#F7F7FF"/>
+          <circle cx="24" cy="21" r="3" fill="#4ECDC4"/>
+          <defs>
+            <linearGradient id="gradLogo" x1="0" y1="0" x2="48" y2="48">
+              <stop stop-color="#8B5CF6"/><stop offset="1" stop-color="#FF6FB5"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+      <span class="brand-text">AERO <em>ADDICTZ</em></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#journeys">Journeys</a>
+      <a href="#fleet">Fleet</a>
+      <a href="#cabin">Cabin</a>
+      <a href="#hud">Control</a>
+      <a href="#safety">Safety</a>
+      <a href="#seats">Seats</a>
+      <a href="#future">Future</a>
+    </nav>
+
+    <button class="nav-cta" id="navCtaBtn">Reserve a seat</button>
+
+    <button class="nav-burger" id="navBurger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="hero-earth" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <p class="pill-tag">🚀 Now boarding a new generation of explorers</p>
+    <h1 class="hero-title">
+      Beyond Earth is closer<br/> than you think.
+    </h1>
+    <p class="hero-tagline">"Your next destination isn't on Earth."</p>
+    <p class="hero-sub">
+      AERO ADDICTZ turns suborbital hops, orbital stays and future lunar flybys into
+      journeys anyone can dream about — guided by real mission data and a slightly
+      overexcited AI co-pilot named Orbi.
+    </p>
+    <div class="hero-actions">
+      <a href="#journeys" class="btn btn-primary">Explore missions</a>
+      <button class="btn btn-ghost" id="watchExperienceBtn">▶ Watch the experience</button>
+    </div>
+  </div>
+
+  <!-- cute floating astronaut mascot -->
+  <div class="hero-astro" id="heroAstro">
+    <svg viewBox="0 0 220 260" width="220" height="260" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="110" cy="235" rx="55" ry="12" fill="#000" opacity="0.25"/>
+      <!-- backpack -->
+      <rect x="70" y="95" width="80" height="90" rx="20" fill="#C9CCF2"/>
+      <!-- body -->
+      <path d="M60 110c0-33 22-55 50-55s50 22 50 55v55c0 22-22 38-50 38s-50-16-50-38v-55z" fill="#F7F7FF"/>
+      <!-- chest panel -->
+      <rect x="90" y="130" width="40" height="26" rx="8" fill="#8B5CF6"/>
+      <circle cx="100" cy="143" r="4" fill="#FFD166"/>
+      <circle cx="112" cy="143" r="4" fill="#4ECDC4"/>
+      <circle cx="124" cy="143" r="4" fill="#FF6FB5"/>
+      <!-- arms -->
+      <path d="M60 120c-18 4-28 20-24 42 3 14 14 22 14 22l16-10s-8-8-9-18c-1-9 3-16 10-20z" fill="#F7F7FF"/>
+      <path d="M160 120c18 4 28 20 24 42-3 14-14 22-14 22l-16-10s8-8 9-18c1-9-3-16-10-20z" fill="#F7F7FF"/>
+      <!-- legs -->
+      <path d="M85 195c-4 18-6 34-2 40 5 8 20 8 24 0 3-8 3-24 3-40h-25z" fill="#F7F7FF"/>
+      <path d="M135 195c4 18 6 34 2 40-5 8-20 8-24 0-3-8-3-24-3-40h25z" fill="#F7F7FF"/>
+      <!-- helmet -->
+      <circle cx="110" cy="70" r="46" fill="#F7F7FF"/>
+      <circle cx="110" cy="72" r="36" fill="#171B4D"/>
+      <circle cx="110" cy="72" r="36" fill="url(#visorGrad)" opacity="0.85"/>
+      <circle cx="98" cy="60" r="8" fill="#ffffff" opacity="0.5"/>
+      <defs>
+        <radialGradient id="visorGrad" cx="0.35" cy="0.3" r="0.9">
+          <stop offset="0%" stop-color="#8B5CF6"/>
+          <stop offset="60%" stop-color="#4ECDC4"/>
+          <stop offset="100%" stop-color="#171B4D"/>
+        </radialGradient>
+      </defs>
+      <circle cx="70" cy="130" r="7" fill="#FFD166"/>
+      <circle cx="150" cy="130" r="7" fill="#FFD166"/>
+    </svg>
+    <div class="astro-spark astro-spark-1">✦</div>
+    <div class="astro-spark astro-spark-2">✧</div>
+    <div class="astro-spark astro-spark-3">★</div>
+  </div>
+
+  <button class="scroll-cue" id="scrollCue">
+    <span>Scroll to ascend</span>
+    <span class="scroll-cue-arrow">↓</span>
+  </button>
+</section>
+
+<!-- ================= JOURNEY SELECTOR ================= -->
+<section class="section" id="journeys">
+  <div class="section-head">
+    <h2>Choose your journey</h2>
+    <p>Three ways to leave the planet — one of them isn't ready for boarding just yet.</p>
+  </div>
+
+  <div class="journey-grid" id="journeyGrid">
+    <!-- filled by JS from /api/missions, with static fallback already in markup -->
+    <article class="journey-card" data-tilt data-mission="suborbital">
+      <div class="journey-icon">🪐</div>
+      <h3>Suborbital Hop</h3>
+      <ul class="journey-stats">
+        <li><span>Altitude</span><strong>100+ km</strong></li>
+        <li><span>Weightlessness</span><strong>~6 minutes</strong></li>
+        <li><span>Mission length</span><strong>90 minutes</strong></li>
+      </ul>
+      <p class="journey-desc">A quick, dramatic taste of space — up past the Kármán line and gently back down.</p>
+      <button class="btn btn-small btn-primary journey-explore">Explore</button>
+    </article>
+
+    <article class="journey-card journey-card--featured" data-tilt data-mission="orbital">
+      <div class="journey-badge">Most booked</div>
+      <div class="journey-icon">🛰️</div>
+      <h3>Orbital Stay</h3>
+      <ul class="journey-stats">
+        <li><span>Duration</span><strong>3–5 days</strong></li>
+        <li><span>Habitat</span><strong>Luxury station</strong></li>
+        <li><span>Views</span><strong>16 sunrises/day</strong></li>
+      </ul>
+      <p class="journey-desc">Wake up above the clouds in a private cabin with a full orbit of Earth every 90 minutes.</p>
+      <button class="btn btn-small btn-primary journey-explore">Explore</button>
+    </article>
+
+    <article class="journey-card journey-card--soon" data-tilt data-mission="lunar">
+      <div class="journey-badge journey-badge--soon">Coming soon</div>
+      <div class="journey-icon">🌙</div>
+      <h3>Lunar Flyby</h3>
+      <ul class="journey-stats">
+        <li><span>Route</span><strong>Deep-space loop</strong></li>
+        <li><span>Highlight</span><strong>Far side of the Moon</strong></li>
+        <li><span>Status</span><strong>In development</strong></li>
+      </ul>
+      <p class="journey-desc">A future deep-space journey around the Moon and home again. Join the waitlist to fly early.</p>
+      <button class="btn btn-small btn-ghost journey-explore" disabled>Join waitlist</button>
+    </article>
+  </div>
+</section>
+
+<!-- ================= MISSION TIMELINE ================= -->
+<section class="section section--dark" id="timeline">
+  <div class="section-head">
+    <h2>What a mission actually feels like</h2>
+    <p>Six moments, from the launch pad to your front door.</p>
+  </div>
+
+  <div class="timeline" id="timelineTrack">
+    <div class="timeline-line"></div>
+    <div class="timeline-step" data-step="1">
+      <div class="timeline-dot">🌍</div>
+      <h4>Earth</h4>
+      <p>Final checks, family goodbyes, one last cup of coffee that behaves normally.</p>
+    </div>
+    <div class="timeline-step" data-step="2">
+      <div class="timeline-dot">🔥</div>
+      <h4>Launch</h4>
+      <p>Engines light. 3g of pure noise and grinning for about ninety seconds.</p>
+    </div>
+    <div class="timeline-step" data-step="3">
+      <div class="timeline-dot">🌌</div>
+      <h4>Edge of space</h4>
+      <p>The sky turns black at 100km — the Kármán line, officially "space."</p>
+    </div>
+    <div class="timeline-step" data-step="4">
+      <div class="timeline-dot">🧑‍🚀</div>
+      <h4>Zero gravity</h4>
+      <p>Unbuckle. Float. Try not to cry (most people cry a little).</p>
+    </div>
+    <div class="timeline-step" data-step="5">
+      <div class="timeline-dot">🛰️</div>
+      <h4>Orbit</h4>
+      <p>Earth scrolls by beneath you, once every ninety minutes, forever.</p>
+    </div>
+    <div class="timeline-step" data-step="6">
+      <div class="timeline-dot">🪂</div>
+      <h4>Return home</h4>
+      <p>Re-entry glow, parachutes, and a very good story for the rest of your life.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FLEET / SPACECRAFT ================= -->
+<section class="section" id="fleet">
+  <div class="section-head">
+    <h2>Meet the Comet-9</h2>
+    <p>Tap a glowing dot to look inside the spacecraft.</p>
+  </div>
+
+  <div class="fleet-wrap">
+    <div class="fleet-ship" id="fleetShip">
+      <svg viewBox="0 0 500 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="250" cy="270" rx="160" ry="14" fill="#000" opacity="0.25"/>
+        <path d="M60 160c0-45 60-90 190-90s190 45 190 90-40 70-190 70S60 205 60 160z" fill="#E9EAF9"/>
+        <path d="M60 160c0-45 60-90 190-90s190 45 190 90" fill="none" stroke="#8B5CF6" stroke-width="3" opacity="0.4"/>
+        <ellipse cx="250" cy="150" rx="150" ry="55" fill="#171B4D" opacity="0.06"/>
+        <circle cx="200" cy="140" r="26" fill="#4ECDC4" opacity="0.85"/>
+        <circle cx="260" cy="140" r="26" fill="#4ECDC4" opacity="0.85"/>
+        <circle cx="320" cy="140" r="20" fill="#4ECDC4" opacity="0.85"/>
+        <path d="M60 160c-30 10-45 30-45 30s25 15 55 8" fill="#FF6FB5"/>
+        <path d="M440 160c30 10 45 30 45 30s-25 15-55 8" fill="#FF6FB5"/>
+        <path d="M170 228c0 10 30 18 80 18s80-8 80-18-30 6-80 6-80-16-80-6z" fill="#FFD166" opacity="0.9"/>
+      </svg>
+
+      <button class="hotspot" style="top:46%; left:38%;" data-panel="cabin">+</button>
+      <button class="hotspot" style="top:46%; left:50%;" data-panel="windows">+</button>
+      <button class="hotspot" style="top:38%; left:62%;" data-panel="deck">+</button>
+      <button class="hotspot" style="top:70%; left:14%;" data-panel="propulsion">+</button>
+      <button class="hotspot" style="top:78%; left:50%;" data-panel="safety">+</button>
+    </div>
+
+    <div class="fleet-panel" id="fleetPanel">
+      <h4 id="fleetPanelTitle">Tap a hotspot</h4>
+      <p id="fleetPanelText">Each glowing marker on the Comet-9 opens details about that system — cabin comfort, propulsion, and more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CABIN ================= -->
+<section class="section section--split" id="cabin">
+  <div class="cabin-copy">
+    <p class="pill-tag pill-tag--alt">Inside the cabin</p>
+    <h2>Wake up above the world.</h2>
+    <p class="section-lead">Designed for the rarest view in the universe — and for sleeping through most of it anyway.</p>
+    <ul class="cabin-features">
+      <li>🪟 Floor-to-ceiling Earth-facing windows</li>
+      <li>💺 Reclining zero-g lounge seating</li>
+      <li>🛌 Six private sleeping pods</li>
+      <li>💡 Adaptive circadian lighting</li>
+      <li>🧴 Featherweight, spill-proof everything</li>
+    </ul>
+  </div>
+  <div class="cabin-visual">
+    <div class="cabin-window">
+      <div class="cabin-window-earth"></div>
+      <div class="cabin-window-frame"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MISSION CONTROL HUD ================= -->
+<section class="section section--dark" id="hud">
+  <div class="section-head">
+    <h2>Mission control, live</h2>
+    <p>A peek at the telemetry our flight computers watch every second.</p>
+  </div>
+
+  <div class="hud-panel">
+    <div class="hud-stat">
+      <span class="hud-label">Altitude</span>
+      <span class="hud-value" id="hudAltitude">0</span>
+      <span class="hud-unit">km</span>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-label">Velocity</span>
+      <span class="hud-value" id="hudVelocity">0.0</span>
+      <span class="hud-unit">km/s</span>
+    </div>
+    <div class="hud-stat hud-stat--status">
+      <span class="hud-label">Mission status</span>
+      <span class="hud-value hud-value--text" id="hudStatus">STANDBY</span>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-label">Earth distance</span>
+      <span class="hud-value" id="hudDistance">0</span>
+      <span class="hud-unit">km</span>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-label">Flight time</span>
+      <span class="hud-value hud-value--mono" id="hudFlightTime">00:00:00</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SAFETY & TECH ================= -->
+<section class="section" id="safety">
+  <div class="section-head">
+    <h2>Engineered for the extraordinary</h2>
+    <p>None of this is romantic. All of it is checked twice.</p>
+  </div>
+
+  <div class="safety-grid">
+    <div class="safety-card"><div class="safety-ico">🛡️</div><h4>Redundant flight systems</h4><p>Triple-backed controls for every critical function.</p></div>
+    <div class="safety-card"><div class="safety-ico">🤖</div><h4>Autonomous flight computers</h4><p>Self-correcting guidance with human override at every step.</p></div>
+    <div class="safety-card"><div class="safety-ico">🔥</div><h4>Thermal protection</h4><p>Re-entry shielding rated well past mission maximums.</p></div>
+    <div class="safety-card"><div class="safety-ico">🚨</div><h4>Emergency systems</h4><p>Launch abort and rapid-return protocols on standby.</p></div>
+    <div class="safety-card"><div class="safety-ico">🎓</div><h4>Astronaut-grade training</h4><p>Every traveler completes full pre-flight certification.</p></div>
+    <div class="safety-card"><div class="safety-ico">📡</div><h4>Continuous monitoring</h4><p>Ground control tracks every mission, second by second.</p></div>
+  </div>
+</section>
+
+<!-- ================= SPACESUIT ================= -->
+<section class="section section--split section--reverse" id="suit">
+  <div class="suit-visual" id="suitVisual">
+    <svg viewBox="0 0 240 320" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="305" rx="70" ry="12" fill="#000" opacity="0.2"/>
+      <path d="M70 130c0-40 22-65 50-65s50 25 50 65v90c0 30-22 55-50 55s-50-25-50-55v-90z" fill="#F7F7FF"/>
+      <rect x="95" y="150" width="50" height="30" rx="8" fill="#8B5CF6"/>
+      <circle cx="120" cy="70" r="46" fill="#F7F7FF"/>
+      <circle cx="120" cy="72" r="36" fill="url(#suitVisorGrad)"/>
+      <defs>
+        <radialGradient id="suitVisorGrad" cx="0.35" cy="0.3" r="0.9">
+          <stop offset="0%" stop-color="#4ECDC4"/><stop offset="100%" stop-color="#171B4D"/>
+        </radialGradient>
+      </defs>
+      <circle cx="66" cy="120" r="10" fill="#FFD166"/>
+      <circle cx="174" cy="120" r="10" fill="#FFD166"/>
+    </svg>
+    <button class="hotspot" style="top:16%; left:50%;" data-suit="helmet">+</button>
+    <button class="hotspot" style="top:45%; left:50%;" data-suit="life">+</button>
+    <button class="hotspot" style="top:60%; left:30%;" data-suit="thermal">+</button>
+    <button class="hotspot" style="top:35%; left:78%;" data-suit="comm">+</button>
+    <button class="hotspot" style="top:85%; left:50%;" data-suit="mobility">+</button>
+  </div>
+  <div class="suit-copy">
+    <p class="pill-tag pill-tag--alt">The suit</p>
+    <h2>Your second skin, out there.</h2>
+    <p class="section-lead" id="suitText">Tap a marker on the suit to learn what keeps you alive, comfortable, and connected.</p>
+  </div>
+</section>
+
+<!-- ================= SEAT SELECTION ================= -->
+<section class="section" id="seats">
+  <div class="section-head">
+    <h2>Choose your seat</h2>
+    <p>Every seat has a view. Some have a better one.</p>
+  </div>
+
+  <div class="seat-wrap">
+    <div class="seat-map" id="seatMap"></div>
+    <div class="seat-info" id="seatInfo">
+      <h4>No seat selected</h4>
+      <p>Pick any seat in the cabin map to see its view and class.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COUNTDOWN ================= -->
+<section class="section section--dark section--countdown" id="countdown">
+  <p class="pill-tag">Next AERO ADDICTZ mission</p>
+  <h2 class="countdown-title">The launch window is open.</h2>
+  <div class="countdown-clock" id="countdownClock">
+    <div class="countdown-unit"><span id="cdDays">00</span><label>days</label></div>
+    <div class="countdown-unit"><span id="cdHours">00</span><label>hours</label></div>
+    <div class="countdown-unit"><span id="cdMinutes">00</span><label>min</label></div>
+    <div class="countdown-unit"><span id="cdSeconds">00</span><label>sec</label></div>
+  </div>
+  <button class="btn btn-primary btn-large" id="reserveBtn">Reserve your journey →</button>
+</section>
+
+<!-- ================= FUTURE MISSIONS ================= -->
+<section class="section" id="future">
+  <div class="section-head">
+    <h2>Where we're headed</h2>
+    <p>The roadmap, in real years.</p>
+  </div>
+  <div class="future-line">
+    <div class="future-stop"><span class="future-year">2027</span><span class="future-name">Suborbital</span></div>
+    <div class="future-stop"><span class="future-year">2029</span><span class="future-name">Orbital</span></div>
+    <div class="future-stop"><span class="future-year">2032</span><span class="future-name">Lunar flyby</span></div>
+    <div class="future-stop"><span class="future-year">2035</span><span class="future-name">Lunar expedition</span></div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="final-cta" id="finalCta">
+  <div class="final-earth" aria-hidden="true"></div>
+  <h2>The universe is waiting.</h2>
+  <p>Become a space traveler.</p>
+  <button class="btn btn-primary btn-large" id="finalCtaBtn">Begin your journey</button>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="brand-text">AERO <em>ADDICTZ</em></span>
+      <p>Beyond Earth.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#journeys">Missions</a>
+      <a href="#fleet">Spacecraft</a>
+      <a href="#cabin">Experience</a>
+      <a href="#safety">Safety</a>
+      <a href="#future">Future</a>
+      <a href="#" id="aboutLink">About</a>
+      <a href="#" id="contactLink">Contact</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" aria-label="Twitter">🐦</a>
+      <a href="#" aria-label="Instagram">📷</a>
+      <a href="#" aria-label="YouTube">▶️</a>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2026 AERO ADDICTZ. A fictional space tourism company built for demo purposes.</p>
+</footer>
+
+<!-- ================= AI CHAT WIDGET (Orbi) ================= -->
+<div class="chat-launcher" id="chatLauncher">
+  <span class="chat-launcher-emoji">🧑‍🚀</span>
+</div>
+
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <span class="chat-avatar">🧑‍🚀</span>
+      <div>
+        <strong>Orbi</strong>
+        <p>AI mission guide</p>
+      </div>
+    </div>
+    <button class="chat-close" id="chatClose">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-bubble chat-bubble--bot">
+      Hi, I'm Orbi 👋 Ask me about missions, seats, safety, or what zero gravity actually feels like.
+    </div>
+  </div>
+  <form class="chat-input-row" id="chatForm">
+    <input type="text" id="chatInput" placeholder="Ask Orbi something..." autocomplete="off" />
+    <button type="submit">➤</button>
+  </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
